@@ -317,13 +317,13 @@ async def vector_search(query: str, limit=5):
         return pd.DataFrame()
 
 def get_welcome_message(name):
-    """User-focused welcome message for XYZ GROCERY COMPANY."""
+    """User-focused welcome message for HoReCa XYZ Company."""
     return (
-        "✨ <b>Welcome to XYZ GROCERY COMPANY</b> ✨\n"
+        "✨ <b>Welcome to HoReCa XYZ Company</b> ✨\n"
         "━━━━━━━━━━━━━━━━━━━━\n"
         "✅ <b>We Sell:</b> Spices, Dals, Rice & Dairy\n"
         "🕓 <b>Open:</b> 10:30 AM to 09:30 PM\n"
-        "📍 <b>Location:</b> Begum Bazar\n"
+        "📍 <b>Location:</b> Digital Distribution\n"
         "💡 <i>(Note: No fresh vegetables)</i>\n"
         "━━━━━━━━━━━━━━━━━━━━\n"
         "🔎 <b>Search Tips:</b>\n"
@@ -341,7 +341,14 @@ def get_chat_history(user_id):
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user = update.effective_user
     name = user.first_name or "Partner"
-    await update.message.reply_html(get_welcome_message(name))
+    logo_path = os.path.join(BASE_DIR, "logo.png")
+    welcome_msg = get_welcome_message(name)
+    if os.path.exists(logo_path):
+        with open(logo_path, "rb") as f:
+            await update.message.reply_photo(photo=f, caption=welcome_msg, parse_mode='HTML')
+    else:
+        await update.message.reply_html(welcome_msg)
+
     if is_owner(user.id):
         await update.message.reply_html("👋 <b>Admin recognized!</b> Use /admin to see lead management tools.")
 
@@ -358,13 +365,13 @@ async def admin_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
          InlineKeyboardButton("📥 Export Leads", callback_data="admin_export")],
         [InlineKeyboardButton("🔙 Close Menu", callback_data="close_admin")]
     ])
-    await update.message.reply_html("🛠 <b>Sri Company Admin Dashboard</b>\nWhat would you like to do?", reply_markup=markup)
+    await update.message.reply_html("🛠 <b>HoReCa XYZ Company Admin Dashboard</b>\nWhat would you like to do?", reply_markup=markup)
 
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Check the health and status of the bot remotely."""
     me = await context.bot.get_me()
     status_msg = (
-        "🖥️ <b>XYZ GROCERY COMPANY ENGINE STATUS</b>\n"
+        "🖥️ <b>HoReCa XYZ Company ENGINE STATUS</b>\n"
         "━━━━━━━━━━━━━━━━━━━━\n"
         f"✅ <b>Status:</b> Online & Connected\n"
         f"🤖 <b>Bot:</b> @{me.username}\n"
@@ -382,7 +389,7 @@ async def stock_report(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         low_stock = df_products[df_products['StockQty'] < 10].sort_values('StockQty')
         out_of_stock = df_products[df_products['StockQty'] <= 0]
         msg = [
-            "📊 <b>XYZ GROCERY COMPANY: STOCK SUMMARY</b>",
+            "📊 <b>HoReCa XYZ Company: STOCK SUMMARY</b>",
             f"📅 <b>Date:</b> {datetime.now().strftime('%d-%b-%Y')}",
             f"🕒 <b>Time:</b> {datetime.now().strftime('%I:%M %p')}",
             "━━━━━━━━━━━━━━━━━━━━",
@@ -405,7 +412,7 @@ async def stock_report(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
                 if row['StockQty'] > 0:
                     msg.append(f"• {str(row['Name']).title()} ➞ <b>{row['StockQty']} left</b>")
         msg.append("\n━━━━━━━━━━━━━━━━━━━━")
-        msg.append("\n📍 *XYZ GROCERY COMPANY, BEGUM BAZAR*")
+        msg.append("\n📍 *HoReCa XYZ Company, Digital Distribution*")
         await update.message.reply_html("\n".join(msg))
     except Exception as e:
         logger.error(f"Stock report error: {e}")
@@ -579,7 +586,7 @@ def search_product(query: str):
             
     return pd.DataFrame(final_results).head(25)
 
-SYSTEM_PERSONA = """You are the "SRI COMPANY BUSINESS MANAGER". 
+SYSTEM_PERSONA = """You are the "HoReCa XYZ Company BUSINESS MANAGER". 
 RANGE: Spices, Pulses, Rice, Oil, Ghee, Dairy, Dry Fruits. 
 OUT OF SCOPE: Fresh Fruits, Vegetables, Meat, Fish.
 

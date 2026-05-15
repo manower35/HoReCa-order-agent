@@ -1,0 +1,14 @@
+Phase,Category,Problem Name,Technical Solution,Example Data / Result
+Phase 1,Development,AI Understanding,Integrated Gemini 1.5 Flash AI Engine,User: "10kg rice" ➞ JSON: {"item": "rice"\, "qty": 10}
+Phase 1,Development,Inventory Data,Pandas CSV Loading with Smart Mapping,Automatically finds "Price" or "Rate" columns in products.csv
+Phase 2,Optimization,High Search Latency,Fast-Track Keyword Routing,Reduced response time from 4.0s to 0.2s for simple queries
+Phase 2,Optimization,User Anxiety,Implemented "Live Pulse" (Searching...) messages,User sees instant activity while AI is thinking
+Phase 2,Optimization,Multi-Item Lists,Query Splitting & Diverse Search Logic,Handles lists like "Rice\, Dal\, Sugar" in a single message
+Phase 3,Stability,HTML Parse Crash,Mega-Safe HTML Escaping (html.escape),Safe rendering for items with symbols like "&"
+Phase 3,Stability,Messy AI Output,Robust JSON Regex Extractor,Fixes malformed AI responses automatically
+Phase 4,UI/UX,Data Persistence,Migrated Cart System to SQLite Database,Carts stay saved even after server restarts
+Phase 4,UI/UX,Confusing Deletions,Interactive Serial Number Cart with Red ❌ Buttons,User clicks "❌ 1" to remove the first item instantly
+Phase 5,Deployment,24/7 Availability,Google Cloud Run Migration with Health Checks,Bot stays online 24/7 without needing a laptop
+Phase 5,Deployment,Unprofessional Bills,Tabular PDF Invoice Generator (fpdf),Professional bill with SNo\, Item\, Rate\, Qty\, Amount
+Phase 5,Deployment,Order Management,Real-time Shop Owner Notifications,Owner gets instant Telegram alert for every new order
+Phase 6,Branding,Unbranded Invoices,Integrated Custom Logo with Auto-Centering Logic,Branded PDF quotations with high-visibility layout

@@ -1,0 +1,37 @@
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Databases and user data
+*.db
+grocery.db
+carts.json
+orders.json
+
+# Caches & Storage
+cache/
+image_cache/
+vector_db/
+user_memories/
+invoices/
+
+# Logs & Temporary files
+*.log
+error.txt
+test_out*.txt
+scratch/
+scratch_report.py
+
+# Binaries
+*.exe
+gcloud-installer.exe
